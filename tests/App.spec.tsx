@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import App from "../src/App";
 
 describe("App Component", () => {
@@ -61,16 +61,19 @@ test("click liked button", () => {
     const update1 = screen.getByText(/liked/i);
     expect(update1).toBeInTheDocument();
 });
+
 test("Add song", async () => {
     render(<App />);
     const addnewmovieButton = screen.getByRole("button", {
         name: /add new movie/i,
     });
-    addnewmovieButton.click();
+    fireEvent.click(addnewmovieButton);
     const addsongButton = await screen.findByRole("button", {
         name: /add song/i,
     });
-    addsongButton.click();
-    const update1 = await screen.findByText("❌");
-    expect(update1).toBeInTheDocument();
+    fireEvent.click(addsongButton);
+    await waitFor(() => {
+        const update1 = screen.getByText("❌");
+        expect(update1).toBeInTheDocument();
+    });
 });
