@@ -7,13 +7,23 @@ describe("WatchStatus component", () => {
         liked: false,
         when: null,
     };
-    it("Renders the watch status", () => {
-        render(<WatchStatus watched={seenWatchStatus}></WatchStatus>);
-    });
-    it("Renders the watch status", () => {
-        render(<WatchStatus watched={seenWatchStatus}></WatchStatus>);
-        const watchedText = screen.getByText(/Watched/i);
+    it("Renders the seen watch status", () => {
+        render(
+            <WatchStatus
+                watched={{
+                    seen: true,
+                    liked: false,
+                    when: null,
+                }}
+            ></WatchStatus>,
+        );
+        const watchedText = screen.getByText(/Watched/);
         expect(watchedText).toBeInTheDocument();
+    });
+    it("Renders the unseen watch status", () => {
+        render(<WatchStatus watched={seenWatchStatus}></WatchStatus>);
+        const watchedText = screen.queryByText(/Watched/);
+        expect(watchedText).not.toBeInTheDocument();
     });
     it("Renders the watch status", () => {
         render(

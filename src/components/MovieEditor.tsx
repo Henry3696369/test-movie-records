@@ -81,7 +81,7 @@ export function MovieEditor({
                     {/* Rating */}
                     <Form.Group controlId="formMovieRating" as={Row}>
                         <Form.Label column sm={2}>
-                            Release Year:
+                            Rating:
                         </Form.Label>
                         <Col>
                             <Form.Select
